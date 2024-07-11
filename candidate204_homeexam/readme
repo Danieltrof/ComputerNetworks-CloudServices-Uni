@@ -1,0 +1,57 @@
+# Project Portfolio for the home exam in Data 2410
+
+A collection of projects developed by Danils Trofimovs s374922 for the home exam in DATA 2410.
+
+## Project: File Transfer Using UDP/DRTP Protocol
+
+### Description
+This project implements a file transfer system using a custom UDP-based protocol (DRTP). It consists of three main components: a file sender (client), a file receiver (server), and an application script to manage command-line arguments and initiate the transfer process. The project includes features such as a three-way handshake, sliding window for packet transmission, and retransmission of lost packets.
+
+### File Overview
+1. **application.py**: The main script that parses command-line arguments and starts either the client or server mode.
+2. **client.py**: Implements the file sender functionality using the UDP/DRTP protocol.
+3. **server.py**: Implements the file receiver functionality using the UDP/DRTP protocol.
+
+## Running the Application
+
+### Requirements
+- Python 3.x
+- argparse module
+
+### Running the Server
+To run the server, use the following command:
+python application.py -s -i <IP_ADDRESS> -p <PORT> -d <SEQUENCE_NUMBER>
+
+example:
+python application.py -s -i 127.0.0.1 -p 8088 -d 1835
+
+### Running the Client
+To run the client, use the following command:
+python application.py -c -i <IP_ADDRESS> -p <PORT> -f <FILE_PATH> -w <WINDOW_SIZE>
+
+example:
+python application.py -s -i 127.0.0.1 -p 8088 -f iceland_safiqul.jpg -w 3
+
+### Arguments
+- `-s, --server`: Run in server mode.
+- `-c, --client`: Run in client mode.
+- `-p, --port`: Port number to bind/connect to (default: 8088).
+- `-i, --ip`: IP address to bind/connect to (default: 127.0.0.1).
+- `-f, --file`: Path to the file to send (required in client mode).
+- `-w, --window`: Size of the sliding window for packet transmission (default: 3).
+- `-d, --discard`: Packet sequence number to discard for testing purposes.
+
+## Example Usage
+
+### Server
+Start the server in one terminal:
+python application.py -s - 8088 -i 127.0.0.1
+
+### Client
+Start the client in another terminal:
+python application.py -c -p 8088 -i 127.0.0.1 -f path/to/file.jpg
+
+The server will receive the file from client and save it as received_photo.jpg. The client will send the file using a sliding window protocol, ensuring reliable data transfer with acknowledgment and retransmission mechanisms.
+
+## Conclusion
+This project demonstrates a reliable file transfer system using a custom UDP-based protocol with features such as sliding window and retransmission of lost packets. It provides a practical example of implementing reliable data transfer over an unreliable protocol like UDP.
